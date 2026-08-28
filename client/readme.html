@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BWIWORLD README</title>
+		<!--The README CSS is small, it's ok to use an internal stylesheet-->
+		<style>
+			@font-face{
+				font-family: "Tahoma";
+				src: url("./Tahoma.woff");
+			}
+			body{
+				background-color: #202020;
+				align-items: center;
+			}
+			#content{
+				font-family: "Tahoma";
+    			width: 75%;
+    			margin: 32px auto;
+    			padding: 32px;
+    			background-color: rgba(255, 255, 225, 0.8);
+    			border-radius: 10px;
+    			border: 1px solid black;
+			}
+			@keyframes rainbowtxt {
+				from{filter:hue-rotate(0deg)}
+				to{filter:hue-rotate(360deg)}
+			}
+			.rainb {
+				color:red;
+				animation: rainbowtxt 1s linear infinite;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=content>
+			<img src="./img/logo_readme.png"><br>
+			<a href="/">Return</a>
+			
+			<h2>How do I use BonziWORLD?</h2>
+			<ol>
+      			<li>Enter a nickname (under 25 characters). If you don't enter one, you'll be named "Anonymous". (we r legion du nut 4 get). Your name is saved.</li>
+      			<li>Optionally, enter a room ID. If you want to join someone else, their room ID will be in the bottom-right corner of the screen.</li>
+      			<li>Be a BonziBUDDY</li>
+    		</ol>
+			<h2>What are the commands?</h2>
+			If you see any brackets, they indicate a placeholder. Don't type them in.
+			<ul>
+		      <li>/name [name] - Change your name</li>
+		      <li>/speed [number] - Change your voice's speed</li>
+		      <li>/pitch [number] - Change your voice's pitch</li>
+		      <li>/color [color] - Change your BonziBUDDY's color (not case sensitive)! The ones available are:
+		          <ul>
+		              <li>Purple</li>
+		              <li>Blue</li>
+		              <li>Red</li>
+		              <li>Green</li>
+		              <li>Pink</li>
+		              <li>Black</li>
+		              <li>Brown</li>
+					  <li>Orange</li>
+					  <li>Yellow</li>
+					  <li>White</li>
+		          </ul>
+				  <br>
+				  Some days you may also use /color [URL]<br>
+				  to use custom colors. They will not always<br>
+				  be enabled.
+		      </li>
+			  </ul>
+			  
+			  <ul>
+		      <li>/emote [emote] - Make your BonziBUDDY do something! The ones available are:
+		          <ul>
+		              <li>bow</li>
+		              <li>beat</li>
+		              <li>cool</li>
+		              <li>clap</li>
+		              <li>smile</li>
+		              <li>think</li>
+		          </ul>
+		      </li>
+		      <li>/joke - Tell a horribly written joke</li>
+		      <li>/fact - Tell an AMAZINGLY written fact</li>
+		      <li>/youtube [link] OR /video [link] - Send a youtube video</li>
+		      <li>/image [link] - Send an image from an image url/link</li>
+		      <li>/video [link] - Send a video from an image url/link</li>
+		      <li>/settings - Configure BonziWORLD. A list of settings is coming soon!</li>
+		      <li>/asshole [user] - Call a user an asshole</li>
+		      <li>/clear - Clear the logs</li>
+		      <li>/hail [user] - Worship a user </li>
+		      <li>/backflip - Do a backflip with some extra swag.</li>
+			</ul>
+			<h2 id="new">NEW STUFF</h2>
+			<ul id="economy">
+				<li>Economy <ul>
+					<li>You can send BonziCOINS to users now!</li>
+					<li>You can earn BonziCOINS now!</li>
+					<li>There are leaderboards to see who is the most rich user!</li>
+					<li>You can save and load your progress for later easily.</li>
+					<li>You can gamble. (FICTIONAL)</li>
+					<li>You can buy items like hats, and upgrades!</li>
+				</ul></li>
+				<br>
+				<li>How do I get coins?<ol>
+					<li>Click the BonziCOIN Menu icon.</li>
+					<li>Scroll Down in the window that appears.</li>
+					<li>Click "Automine Bonzicoin" to keep getting BonziCOINS.</li>
+					<li><b>Or</b> Click 'Mine BonziCOIN' to have a small chance at getting some coins. Spam the button and 
+						you are bound to find coins.
+					</li>
+					<li><b>Or</b> Once you have some coins you can click 'Gamble' and gamble a certain amount of coins. There is a small chance
+						you can get all of them back. Try this if you feel lucky! (GAMBLING IS ALL FICTIONAL NO REAL MONEY INVOLVED!!!!!!!!!!!!!!!!!!!!!!!!!)
+					</li>
+				</ol></li>
+			</ul>
+			<h2>Image Whitelist (READ THIS!)</h2>
+			<p>Not all image URL's work. This is because we do not have a proxy at the moment. Here are the URL's you can use for images.</p>
+			<p>Image Allow-list :</p>
+			<ol>
+				<li><a href="https://catbox.moe">Catbox.moe</a></li>
+				<li><a href="https://imgbb.com/">ImgBB</a></li>
+				<li><a href="https://imgur.com/">Imgur</a></li>
+			</ol>
+			<p>You can also link to wiki images.</p>
+			<h2>How to recognize the staff?</h2>
+			The staff consists of Popes (AKA Owner), Operators (AKA High Kings), and Moderators (AKA Low Kings). "Owner" is the tag for the owner, "Operator" is the tag for admins, and "King" is the tag for moderators. If you see someone impersonating the staff, report them immediately. If you are the staff and see someone impersonating you by using a crosscolor, blacklist their crosscolor and statlock them. People can use crosscolors to impersonate staff, so mostly check the tags and use user info to see if their color is king or pope, NOT a crosscolor link
+			<h2>Making text look cool (Markleft)</h2>
+			A markup language for BonziWORLD. Here's how it works:<br><br>
+			$param=value, param2=value2$ your text goes here $$ text after the 2 dollar signs is unaffected<br>
+			Examples: $color=red$red text$$ $font=times_new_roman$times new roman text$$ $font=monospace, color=red$monospace red$$<br><br> There are also short options for formatting text, a list is below
+			<ul>
+		      <li>For bold text type **text**</li>
+		      <li>For big text type ^^text^^</li>
+		      <li>For italic text type ~~text~~</li>
+		      <li>For underlined text type __text__</li>
+		      <li>For line-through text type --text--</li>
+		      <li>For rainbow text type $r$text$r$</li>
+		    </ul>
+		    <h2>Themes</h2>
+		    To set your theme, use the /settings command or desktop applet.<br>
+		    There are currently 6 themes available, though you can enter a custom URL to use your own. Themes are a css file, an example is <a href="/themes/purple.css">here</a>
+		    <ul>
+		    	<li>purple</li>
+		    	<li>blue</li>
+		    	<li>red</li>
+				<li>green</li>
+				<li>black</li>
+				<li>windowsxp</li>
+		    </ul>
+			Credits to JY for letting me fork BIAWorld and use his website for BWIWorld. Without him, this would <b>NEVER</b> exist!
+		</div>
+	</body>
+</html>

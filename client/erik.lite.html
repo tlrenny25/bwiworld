@@ -1,0 +1,2961 @@
+<html lang="en"><head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="The gorilla-based chat app. Anonymous anarchy chat website based on BonziBUDDY.">
+	<meta name="keywords" content="BonziWORLD, BonziBUDDY, Chat, Windows XP">
+	<title>BonziWORLD</title>
+	<meta charset="utf-8">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	<link rel="stylesheet" type="text/css" href="https://bonzi.gay/flex.css">
+	<link rel="stylesheet" type="text/css" href="https://bonzi.gay/style.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://bonzi.gay/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="https://bonzi.gay/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="https://bonzi.gay/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="https://bonzi.gay/favicons/manifest.json">
+	<link rel="mask-icon" href="https://bonzi.gay/favicons/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="https://bonzi.gay/favicons/favicon.ico">
+	<meta name="msapplication-config" content="https://bonzi.gay/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#9370DB">
+	<meta property="og:title" content="BonziWORLD">
+	<meta property="og:description" content="The gorilla-based chat app.">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+	<script defer="" src="https://bonzi.gay/lib/jquery.min.js"></script>
+	<script defer="" src="https://bonzi.gay/lib/seedrandom.min.js"></script>
+    <script>
+        var speak = {play:()=>{},stop:()=>{},onended:()=>{}}
+    </script>
+	<script defer="" src="https://bonzi.gay/lib/jquery.contextMenu.min.js"></script>
+	<script defer="" src="https://bonzi.gay/lib/jGravity.js"></script>
+
+	<script defer="" src="https://bonzi.gay/bonziData.js"></script>
+    <body __processed_d8772914-a6bb-4ad7-ad03-a2787d19f8b4__="true" class="classic" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJMSU5LRURJTiI6ImRpc2FibGVkIiwiQ09ORklHIjoiZGlzYWJsZWQifSwidmVyc2lvbiI6IjIuMC4yNCIsInNjb3JlIjoyMDAyNH1d">
+	<div id="preload" hidden="" bis_skin_checked="1">
+		<img src="https://bonzi.gay/img/desktop/window_header.png">
+		<img src="https://bonzi.gay/img/desktop/window_border.png">
+		<img src="https://bonzi.gay/img/desktop/window_border.png">
+		<img src="https://bonzi.gay/img/bonzi/black.webp">
+		<img src="https://bonzi.gay/img/bonzi/blue.webp">
+		<img src="https://bonzi.gay/img/bonzi/purple.webp">
+		<img src="https://bonzi.gay/img/bonzi/brown.webp">
+		<img src="https://bonzi.gay/img/bonzi/red.webp">
+		<img src="https://bonzi.gay/img/bonzi/green.webp">
+		<img src="https://bonzi.gay/img/bonzi/yellow.webp">
+		<img src="https://bonzi.gay/img/bonzi/cyan.webp">
+		<img src="https://bonzi.gay/img/bonzi/pink.webp">
+		<img src="https://bonzi.gay/img/bonzi/white.webp">
+	</div>
+	<div id="content" bis_skin_checked="1">
+		<div id="room_info" bis_skin_checked="1">
+			Room ID - <span id="room_id">???</span><br>
+			<span id="room_public">This room is public.</span>
+			<span id="room_private">This room is private.</span>
+			<span id="room_owner"><br>You are the owner of this room.</span>
+		</div>
+		
+		<div id="talkcard" hidden="" bis_skin_checked="1"></div>
+		<table id="chat_bar"><tbody><tr>
+			<td id="chat_send">send</td>
+			<td id="chat_message_cont"><input id="chat_message" type="text" placeholder="Enter a message"></td>
+			<td id="chat_tray">
+				<div id="btn_tile" class="tray_btn" bis_skin_checked="1"></div>
+			</td>
+		</tr></tbody></table>
+
+
+		<div id="page_login" class="page" bis_skin_checked="1">
+			<main id="login_readme">Welcome to BonziWORLD!<br><a id="readme" href="readme.html" target="_blank">README</a> <a href="changelog.html" target="_blank">Changelog</a> </main> 
+			<div id="login_card" bis_skin_checked="1">
+				<input id="login_name" type="text" placeholder="Nickname">
+				<input id="login_room" type="text" placeholder="Room ID (Optional)">
+				<div id="login_go" bis_skin_checked="1"></div>
+				<div id="login_error" hidden="" bis_skin_checked="1"></div>
+			</div>
+			<div id="login_load" hidden="" bis_skin_checked="1">loading</div>
+			<div id="login_version" bis_skin_checked="1">Version 1.3.3</div>
+		</div>
+
+		<div id="page_error" class="page" hidden="" bis_skin_checked="1">
+			<div id="error_cont" class="message_cont" bis_skin_checked="1">
+				<img src="https://bonzi.gay/img/error/logo.png"><br>
+				<br>
+				<h1>BonziWORLD.exe has encountered an error and needs to close.</h1><br>
+				Nah, but seriously there was an error and you got disconnected from the server. Chances are, your internet just died out for a brief moment or your device went to sleep. Otherwise the server just screwed up.<br>
+				<br>
+				Try and reload the page. If that doesn't work and your internet is okay, then panic. We'll probably be back up Soon™ though.<br>
+				<br>
+				<a href="#" onclick="window.location.reload()">Reload?</a>
+			</div>
+		</div>
+
+		<div id="chat_log_button" bis_skin_checked="1"></div>
+		
+		<div id="chat_log" class="window" hidden="" bis_skin_checked="1">
+			<div class="window_header" bis_skin_checked="1">
+				BonziLOG™
+				<div id="chat_log_close" class="window_close" bis_skin_checked="1"></div>
+			</div>
+			<div class="window_body" bis_skin_checked="1">
+				<div id="chat_log_content" bis_skin_checked="1"></div>
+			</div>
+			<div id="chat_log_resize" bis_skin_checked="1"></div>
+		</div>
+
+		<div id="page_ban" class="page" hidden="" bis_skin_checked="1">
+			<div id="ban_cont" class="message_cont" bis_skin_checked="1">
+				<img src="https://bonzi.gay/img/ban/logo.png"><br>
+				<br>
+				<h1>You got banned!</h1><br>
+				<br>
+				<b>Why? </b><span id="ban_reason"></span><br>
+				<b>When is it over? </b><span id="ban_end"></span><br>
+			</div>
+		</div>
+
+		<div id="page_kick" class="page" hidden="" bis_skin_checked="1">
+			<div id="kick_cont" class="message_cont" bis_skin_checked="1">
+				<img src="https://bonzi.gay/img/ban/logo.png"><br>
+				<br>
+				<h1>You got kicked!</h1><br>
+				<br>
+				<b>Why? </b><span id="kick_reason"></span><br>
+			</div>
+		</div>
+
+		<div id="page_unsupp" class="page" hidden="" bis_skin_checked="1">
+			<div id="unsupp_cont" class="message_cont" bis_skin_checked="1">
+				<img src="https://bonzi.gay/img/error/logo.png"><br>
+				<br>
+				<h1>BonziWORLD cannot run on this platform.</h1><br>
+				Unfortunately, BonziWORLD cannot run in this browser for the following reasons:<br>
+				<ul id="unsupp_reasons"></ul>
+				You can try to download a BonziWORLD app that works on your device, or update your browser.
+				<div id="login_apps" class="app_showcase" bis_skin_checked="1"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+    <style>
+    @font-face {
+    font-family:'win9x';
+    src: url('https://jy738.github.io/joelschallenge/bonzilib/w95fa.woff2'),url('https://jy738.github.io/joelschallenge/bonzilib/w95fa.woff');
+    }
+    @charset "UTF-8";
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.xp_dialog,
+.message_cont {
+    background: #ffffe1;
+    color: #000;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    border: #000000 solid 1px;
+}
+
+.xp_textbox,
+#login_error,
+#login_readme,
+#login_name,
+#login_room {
+    position: absolute;
+    padding: 4px 3px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #13316f;
+    outline: none;
+    background: #fff;
+    color: #000;
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+body {
+    background-color: #452066;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+body {
+    font-family: "Tahoma", sans-serif;
+}
+
+input {
+    font-family: "Tahoma", sans-serif;
+}
+
+input[type="text"] {
+    background-color: #fff;
+    border: 1px inset #AAA;
+    color: #000;
+}
+
+.xp_bubble,
+.bubble {
+    background: #ffffe1;
+    color: #000;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    border: #000000 solid 1px;
+}
+
+@font-face {
+    font-family: 'Tahoma';
+    src: url("font/Tahoma/Tahoma.eot#iefix") format("embedded-opentype"), url("font/Tahoma/Tahoma.woff") format("woff"), url("font/Tahoma/Tahoma.ttf") format("truetype"), url("font/Tahoma/Tahoma.svg#Tahoma") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.bonzi {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 160px;
+    user-select: none;
+    touch-action: none;
+    background-repeat: no-repeat;
+}
+
+.bubble {
+    font-size: 14px;
+    width: 197px;
+    position: absolute;
+}
+
+.bubble_cont {
+    padding: 12px;
+    user-select: text;
+    max-height: 175px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.bubble::after {
+    content: '';
+    position: absolute;
+}
+
+.bubble-left {
+    right: 150px;
+    top: 40px;
+}
+
+.bubble-left::after {
+    background-image: url("https://bonzi.gay/img/bonzi/bubble_tail_l.png");
+    width: 22px;
+    height: 14px;
+    top: 12px;
+    right: -22px;
+}
+
+.bubble-right {
+    top: 40px;
+    left: 155px;
+}
+
+.bubble-right::after {
+    background-image: url("https://bonzi.gay/img/bonzi/bubble_tail_r.png");
+    width: 22px;
+    height: 14px;
+    top: 12px;
+    left: -22px;
+}
+
+.bubble-bottom {
+    top: 156px;
+}
+
+.bubble-bottom::after {
+    background-image: url("https://bonzi.gay/img/bonzi/bubble_tail_b.png");
+    width: 28px;
+    height: 22px;
+    top: -22px;
+    left: 26px;
+}
+
+.bubble-top {
+    bottom: 150px;
+}
+
+.bubble-top::after {
+    background-image: url("https://bonzi.gay/img/bonzi/bubble_tail_t.png");
+    width: 28px;
+    height: 22px;
+    left: 110px;
+    bottom: -22px;
+}
+
+.bonzi_name {
+    border-style: solid;
+    border-width: 4px 12px 4px 0;
+    border-radius: 9px;
+    border: #000000 solid 1px;
+    padding: 8px;
+    position: absolute;
+    background: #ffffe1;
+    font-size: 12px;
+    color: #000;
+    max-width: 300px;
+    overflow: hidden;
+}
+
+.greentext {
+    color: #789922;
+}
+
+.flag {
+    vertical-align: bottom;
+    width: 1em;
+    height: 1em;
+}
+
+body.vaporwave #content {
+    background-color: #008080;
+    background-image: url("https://bonzi.gay/img/desktop.vaporwave/logo.png"), url("https://bonzi.gay/img/desktop.vaporwave/bg.png");
+    background-position: top left, center;
+    background-repeat: no-repeat;
+}
+
+body.vaporwave #chat_bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 28px;
+    background-image: url("https://bonzi.gay/img/desktop.vaporwave/taskbar.png");
+    background-size: 100% 100%;
+    z-index: 999;
+}
+
+body.vaporwave #chat_tray {
+    background-image: url("https://bonzi.gay/img/desktop.vaporwave/notif_left.png"), url("https://bonzi.gay/img/desktop.vaporwave/notif_right.png"), url("https://bonzi.gay/img/desktop.vaporwave/notif.png");
+    background-repeat: no-repeat;
+    background-position: left, right, left;
+    background-size: 5px 28px, 3px 28px, 100% 100%;
+    vertical-align: middle;
+    padding-left: 7px;
+    padding-top: 3px;
+    width: 22px;
+}
+
+body.vaporwave #btn_tile {
+    background-image: url("https://bonzi.gay/img/desktop.vaporwave/tile.png");
+}
+
+body.vaporwave #chat_send {
+    width: 58px;
+    background-image: url("https://bonzi.gay/img/desktop.vaporwave/start.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    color: #000;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 11px;
+    text-shadow: none;
+    padding-left: 21px;
+    text-transform: capitalize;
+}
+
+body.vaporwave #chat_send:hover {
+    background-position: 0 -28px;
+}
+
+body.vaporwave #chat_send:active {
+    background-position: 0 -56px;
+}
+
+#content {
+    background-color: #452066;
+    background-image: url("https://bonzi.gay/img/desktop/logo.png"), url("https://bonzi.gay/img/desktop/bg.png");
+    background-position: top left, center;
+    background-repeat: no-repeat;
+}
+
+body.classic #content {
+    background-color: #6d33a0;
+}
+
+#chat_bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-image: url("https://bonzi.gay/img/desktop/taskbar.png");
+    background-size: 100% 100%;
+    z-index: 999;
+}
+
+#chat_tray {
+    background-image: url("https://bonzi.gay/img/desktop/notif_left.png"), url("https://bonzi.gay/img/desktop/notif.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 5px 30px, 100% 100%;
+    vertical-align: middle;
+    padding-left: 7px;
+    padding-top: 3px;
+    width: 22px;
+}
+
+.chat_bar_top {
+    top: 0;
+}
+
+#chat_send {
+    width: 100px;
+    user-select: none;
+    background-image: url("https://bonzi.gay/img/desktop/start.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    color: #fff;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
+    padding-left: 35px;
+}
+
+#chat_send:hover {
+    background-position: 0 -33px;
+}
+
+#chat_send:active {
+    background-position: 0 -67px;
+}
+
+#chat_message_cont {
+    padding: 4px;
+    display: flex;
+}
+
+#chat_message {
+    flex: 1;
+}
+
+#room_info {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    line-height: 125%;
+    text-align: right;
+    padding: 7px;
+    font-size: 10px;
+    position: absolute;
+    bottom: 30px;
+    right: 0;
+    user-select: text;
+}
+
+.tray_btn {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin: 2px 0px;
+}
+
+#btn_tile {
+    background-image: url("https://bonzi.gay/img/desktop/tile.png");
+}
+
+#page_login {
+    background-color: #8b5adc;
+    background-image: url("https://bonzi.gay/img/logon/logo.png"), url("https://bonzi.gay/img/logon/top.png"), url("https://bonzi.gay/img/logon/bottom.png"), url("https://bonzi.gay/img/logon/topleft.png"), url("https://bonzi.gay/img/logon/divider.png");
+    background-position: center, top, bottom, top left, center;
+    background-size: auto, 100% 100px, 100% 122px, auto, 1px 100%;
+    background-repeat: no-repeat;
+}
+
+#login_card {
+    background-image: url("https://bonzi.gay/img/logon/card.png");
+    width: 353px;
+    height: 70px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: 20px;
+    margin-top: -35px;
+    box-sizing: border-box;
+}
+
+#login_error {
+    top: 100%;
+    position: absolute;
+    margin-top: 8px;
+    color: #d03b3b;
+    font-size: 12px;
+    padding: 8px;
+}
+
+#login_readme {
+    color: #444;
+    padding: 12px;
+    bottom: 24%;
+    width: auto;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    text-align: center;
+    left: 50%;
+}
+
+#login_name,
+#login_room {
+    width: 160px;
+    box-sizing: border-box;
+}
+
+#login_name {
+    height: 28px;
+    top: 8px;
+    left: 16px;
+    font-size: 14px;
+}
+
+#login_room {
+    height: 18px;
+    top: 43px;
+    left: 16px;
+    font-size: 12px;
+}
+
+#login_go {
+    left: 185px;
+    top: 24px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("https://bonzi.gay/img/logon/go.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#login_go:hover {
+    background-position: 0 -20px;
+}
+
+#login_go:active {
+    background-position: 0 -40px;
+}
+
+#login_load {
+    color: #fff;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 35px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    line-height: 100%;
+    height: 35px;
+    top: 50%;
+    left: 50%;
+    margin-left: 23px;
+}
+
+#login_version {
+    color: #fff;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    font-size: 16px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* css spec blunder */
+[hidden] {
+    display: none !important;
+}
+
+#chat_log_button {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 40px;
+    height: 30px;
+    border: 1px solid white;
+    border-radius: 4px;
+    background:
+        center / 16px no-repeat url("bars.svg"),
+        radial-gradient(circle at 4px 4px, #fff6 0%, #0000 70%),
+        linear-gradient(to top, #512677, #0000 12px),
+        linear-gradient(to left, #512677, #0000 12px),
+        linear-gradient(to bottom, #945cc5 2px, #0000 3px),
+        linear-gradient(to right, #945cc5 2px, #0000 3px),
+        #6310ac;
+}
+
+/* inconsistent as fuck in true XP style */
+#chat_log_button:hover {
+    background:
+        center / 16px no-repeat url("bars.svg"),
+        radial-gradient(circle at 4px 4px, #fff6 0%, #0000 100%),
+        linear-gradient(to top, #5e3b7c, #0000 12px),
+        linear-gradient(to left, #5e3b7c, #0000 12px),
+        linear-gradient(to bottom, #b27fdf 2px, #0000 3px),
+        linear-gradient(to right, #b27fdf 2px, #0000 3px),
+        #8832d4;
+}
+
+#chat_log_button:active {
+    background:
+        center / 16px no-repeat url("bars.svg"),
+        radial-gradient(circle at 4px 4px, #fff3 0%, #0000 70%),
+        linear-gradient(to top, #6e4196 2px, #0000 3px),
+        linear-gradient(to left, #6e4196 2px, #0000 3px),
+        linear-gradient(to right, #361950, #0000 12px),
+        linear-gradient(to bottom, #361950, #0000 12px),
+        #5a1f8f;
+}
+
+#chat_log {
+    position: absolute;
+    width: 350px;
+    height: calc(100% - 30px);
+}
+
+#chat_log .window_body {
+    display: flex;
+}
+
+#chat_log_resize {
+    position: absolute;
+    top: 0;
+    right: -4px;
+    bottom: 0px;
+    width: 12px;
+    cursor: ew-resize;
+    user-select: none;
+}
+
+#chat_log_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    overflow: hidden scroll;
+    font-size: 12pt;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+#chat_log_content hr:first-child {
+    display: none;
+}
+
+.window {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.window_header {
+    display: flex;
+    user-select: none;
+    align-items: center;
+    height: 32px;
+    padding: 2px 7px 0 10px;
+    border-image: url("https://bonzi.gay/img/desktop/window_header.png") 0 9 fill / 0px 9px;
+    image-rendering: pixelated;
+    color: white;
+    font-size: 16px;
+    text-shadow: #0006 2px 2px 1px;
+}
+
+.window_body {
+    flex: 1;
+    padding: 4px 6px 6px 6px;
+    border-image: url("https://bonzi.gay/img/desktop/window_border.png") 0 6 6 6 / 0px 6px 6px 6px;
+    image-rendering: pixelated;
+    background: #ffe;
+    overflow: hidden;
+}
+
+.window_close {
+    margin-left: auto;
+    width: 21px;
+    height: 21px;
+    margin-bottom: 2px;
+    background-image: url("https://bonzi.gay/img/desktop/close.png")
+}
+
+.window_close:hover {
+    background-position-y: -21px;
+}
+
+.window_close:active {
+    background-position-y: -42px;
+}
+
+.log_message {
+    display: flex;
+    flex-direction: row;
+    padding: 1px 6px;
+    gap: 12px;
+    image-rendering: auto;
+    position: relative;
+}
+
+.log_message:hover {
+    background-color: #0002;
+}
+
+.log_time {
+    color: #bbb;
+}
+
+.reply {
+    display: none;
+    width: 14px;
+    height: 14px;
+    margin: 2px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    background: url("https://bonzi.gay/img/reply.svg") center / contain;
+    cursor: pointer;
+    user-select: none;
+}
+
+.userimage {
+    max-width: 100%;
+    max-height: 178px;
+}
+
+.uservideo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 400px;
+    background: black;
+}
+
+.log_message:hover .reply {
+    display: block;
+}
+
+.log_icon {
+    position: relative;
+    align-self: flex-start;
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.log_left_spacing {
+    /* good fucking element */
+    width: 25px;
+    flex-shrink: 0;
+}
+
+.log_message_cont {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.log_message_cont>b:empty {
+    display: none;
+}
+
+hr {
+    border-top: 1px solid lightgrey;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    margin: 2px;
+}
+
+.settings {
+    z-index: 9999;
+}
+
+textarea {
+    flex: 1;
+    background: white;
+    border: 1px solid black;
+    resize: none;
+    margin: 1px 0 1px 0;
+}
+
+.settings .window_body {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 16px 16px 16px;
+}
+
+.blacklist {
+    min-height: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.export_window .window_body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0px 6px 5px 6px;
+}
+
+.import_window .window_body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 5px 10px 10px 10px;
+}
+
+.button_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 2px;
+}
+
+.button_row>button {
+    cursor: pointer;
+    padding: 1px 8px;
+    background-color: transparent;
+    border: 1px outset grey;
+}
+
+.button_row>button:active {
+    border: 1px inset grey;
+}
+
+#talkcard {
+    position: absolute;
+    bottom: 32px;
+    padding: 4px 10px;
+    background-color: #ffffe1;
+    font-size: 10pt;
+    width: calc(100% - 150px);
+    border: 1px solid black;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    user-select: none;
+    z-index: 999;
+}
+
+blockquote {
+    border-left: 3px solid grey;
+    padding: 2px 0px 2px 8px;
+}
+
+.grey {
+    color: grey;
+}
+
+gay-big {
+    font-size: 1.5em;
+}
+
+@keyframes move {
+    from {
+        background-position-x: 500px;
+    }
+
+    to {
+        background-position-x: 0;
+    }
+}
+
+gay-spoiler {
+    background-color: darkslategrey;
+    border-radius: 3px;
+    color: transparent;
+    user-select: none;
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+gay-spoiler:hover {
+    background-color: #777;
+}
+
+gay-spoiler.reveal {
+    background-color: #5555;
+    color: black;
+    user-select: all;
+    cursor: auto;
+}
+
+gay-spoiler:not(.reveal) gay-rainbow {
+    background: none;
+}
+
+gay-rainbow gay-spoiler:not(.reveal) {
+    background-image: linear-gradient(120deg in hsl longer hue, red, red, red);
+    background-size: 500px;
+    animation: move 2s linear infinite;
+}
+
+gay-rainbow {
+    background-image: linear-gradient(120deg in hsl longer hue, red, red, red);
+    background-size: 500px;
+    background-clip: text;
+    color: transparent;
+    animation: move 2s linear infinite;
+}
+
+code {
+    border: 1px solid #bbb;
+    background-color: #ddd;
+    border-radius: 4px;
+    font: monospace;
+    padding: 0 0.2em;
+}
+
+gay-rainbow code {
+    background-image: linear-gradient(#ddd8), linear-gradient(120deg in hsl longer hue, red, red, red);
+    background-size: 500px;
+    animation: move 2s linear infinite;
+    border-color: #0004;
+    color: black;
+}
+
+
+.yes,
+.no {
+    cursor: pointer;
+    padding: 4px;
+    margin: 2px 0px;
+}
+
+.yes {
+    border: 1px solid #060;
+    background-image: linear-gradient(to right, lime 50%, #cfc 50%);
+}
+
+.no {
+    border: 1px solid #a00;
+    background-image: linear-gradient(to right, red 50%, #fcc 50%);
+}
+
+
+@media screen and (max-height: 550px) {
+    #page_login {
+        background-image: url("https://bonzi.gay/img/logon/logo.png"), url("https://bonzi.gay/img/logon/topleft.png");
+        background-position: center, 0 -100px;
+        background-size: auto, auto;
+        background-repeat: no-repeat;
+    }
+
+    #login_readme {
+        font-size: 12px;
+        bottom: 10%;
+    }
+}
+
+@media screen and (max-height: 650px) {
+    #login_apps>a:not(:first-child) {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    #login_apps {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 300px) {
+
+    #login_readme,
+    #login_version {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 400px) and (max-width: 560px) {
+    #login_readme {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    #page_login {
+        background-image: url("https://bonzi.gay/img/logon/logo.mobile.png"), url("https://bonzi.gay/img/logon/topleft.png");
+        background-position: center, 0 -100px;
+        background-size: auto, auto;
+        background-repeat: no-repeat;
+    }
+
+    #login_card {
+        background-image: url("https://bonzi.gay/img/logon/card.mobile.png");
+        width: 223px;
+        height: 70px;
+        margin-left: -112px;
+        margin-top: 40px;
+    }
+
+    #login_readme {
+        bottom: 10%;
+    }
+
+    #login_load {
+        margin-top: 45px;
+        margin-left: 0;
+        transform: translateX(-50%);
+    }
+}
+
+.message_cont {
+    position: absolute;
+    width: 100%;
+    max-width: 512px;
+    height: auto;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+#page_error,
+#page_ban,
+#page_unsupp {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.blessed_body {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.roulette {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    padding: 4px;
+    gap: 4px;
+}
+
+.card, .cardhat {
+    width: 75px;
+    height: 100px;
+    background-position: -28px 0px;
+    image-rendering: auto;
+}
+
+:is(.card, .cardhat):hover {
+    background-color: #00ccff66;
+}
+
+.card {
+    background-size: 1600px;
+}
+
+.cardhat {
+    background-size: 130px;
+}
+
+.angel { background-image: url("https://bonzi.gay/img/bonzi/blessed.webp"); }
+.glow { background-image: url("https://bonzi.gay/img/bonzi/glow.webp"); }
+.noob { background-image: url("https://bonzi.gay/img/bonzi/noob.webp"); }
+.dank { background-image: url("https://bonzi.gay/img/bonzi/dank.webp"); }
+.illuminati { background-image: url("https://bonzi.gay/img/bonzi/illuminati.webp"); }
+.cigar { background-image: url("https://bonzi.gay/img/bonzi/cigar.webp"); }
+
+
+/*!
+ * jQuery contextMenu - Plugin for simple contextMenu handling
+ *
+ * Version: v@VERSION
+ *
+ * Authors: BjÃ¶rn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
+ * Web: http://swisnl.github.io/jQuery-contextMenu/
+ *
+ * Copyright (c) 2011-@YEAR SWIS BV and contributors
+ *
+ * Licensed under
+ *   MIT License http://www.opensource.org/licenses/mit-license
+ *
+ * Date: @DATE
+ */
+.context-menu-icon.context-menu-hover:before {
+    color: #FFF;
+}
+
+.context-menu-icon.context-menu-disabled::before {
+    color: #8c8c8c;
+}
+
+.context-menu-icon.context-menu-icon--fa {
+    display: list-item;
+}
+
+.context-menu-icon.context-menu-icon--fa.context-menu-hover:before {
+    color: #FFF;
+}
+
+.context-menu-icon.context-menu-icon--fa.context-menu-disabled::before {
+    color: #8c8c8c;
+}
+
+.context-menu-icon.context-menu-icon--fa span {
+    font-family: sans-serif;
+}
+
+.context-menu-list {
+    background: #FFF;
+    border: 1px solid #aca899;
+    border-radius: 0;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    font-family: inherit;
+    font-size: 11px;
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    max-width: none;
+    min-width: none;
+    padding: 2px;
+    position: absolute;
+}
+
+.context-menu-item {
+    background-color: #FFF;
+    color: #000;
+    padding: 5px 22px;
+    position: relative;
+    user-select: none;
+}
+
+.context-menu-separator {
+    border-bottom: 1px solid #aca899;
+    margin: 1px 2.5px;
+    padding: 0;
+}
+
+.context-menu-item>label>input,
+.context-menu-item>label>textarea {
+    user-select: text;
+}
+
+.context-menu-item.context-menu-hover {
+    background-color: #316ac5;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.context-menu-item.context-menu-disabled {
+    background-color: #FFF;
+    color: #8c8c8c;
+    cursor: default;
+}
+
+.context-menu-input.context-menu-hover {
+    background-color: #EEE;
+    cursor: default;
+}
+
+.context-menu-submenu:after {
+    content: '';
+    border-style: solid;
+    border-width: .25em 0 .25em .25em;
+    border-color: transparent transparent transparent #000;
+    height: 0;
+    position: absolute;
+    right: .5em;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    z-index: 1;
+}
+
+/**
+ * Inputs
+ */
+.context-menu-item.context-menu-input {
+    padding: .3em .6em;
+}
+
+/* vertically align inside labels */
+.context-menu-input>label>* {
+    vertical-align: top;
+}
+
+/* position checkboxes and radios as icons */
+.context-menu-input>label>input[type="checkbox"],
+.context-menu-input>label>input[type="radio"] {
+    margin-right: .4em;
+    position: relative;
+    top: .12em;
+}
+
+.context-menu-input>label {
+    margin: 0;
+}
+
+.context-menu-input>label,
+.context-menu-input>label>input[type="text"],
+.context-menu-input>label>textarea,
+.context-menu-input>label>select {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+}
+
+.context-menu-input>label>textarea {
+    height: 7em;
+}
+
+.context-menu-item>.context-menu-list {
+    display: none;
+    /* re-positioned by js */
+    right: -.3em;
+    top: .3em;
+}
+
+.context-menu-item.context-menu-visible>.context-menu-list {
+    display: block;
+}
+
+.context-menu-accesskey {
+    text-decoration: underline;
+}
+/*
+    #content {
+    background-color: rgb(41, 147, 149);
+      background-image:url(https://bonzi.gay/img/desktop.vaporwave/logo.png), url(https://bonzi.gay/img/desktop.vaporwave/bg.png);
+    }
+    #page_login {
+    background-color: #8b5adc;
+    background-image: url("https://i.ibb.co/sv6GLr9T/bw.png"),url('https://i.ibb.co/xqPDvTd2/sky95.png');
+    background-position: center;
+    background-size: auto,100% 100%;
+    background-repeat: no-repeat;
+}
+    input,#page_login,#login_name,#login_room,#login_readme {
+    box-shadow:none;
+    border-radius:0px;
+    box-shadow:inset -1px -1px 1px 0 #222222, inset 1px 1px 1px 0px white;
+    }
+    #login_card {
+    background-image: none;
+    background-color: rgb(172 170 170);
+    border: 1px solid gray;
+    padding: 10px 20px;
+    box-shadow: inset 1px 1px 1px 0px white, inset -1px -1px 1px 0 #222222;
+}
+   *{font-family:'win9x';}
+   input{font-family:'win9x';}
+#login_go {
+background-image:url('https://i.ibb.co/Vpqn1s7Q/go.png');
+}
+    #chat_send {
+    background-image: url(https://bonzi.gay/img/desktop.vaporwave/start.png);
+    width: 48px;
+    height: 28px;
+    margin-top: 0px;
+    padding-left:28px;
+    font-size:14px;
+    }
+    #chat_bar {
+    background-image:url(https://bonzi.gay/img/desktop.vaporwave/taskbar.png);
+    }
+    #chat_tray{
+    background-image:url(https://bonzi.gay/img/desktop.vaporwave/notif_left.png), url(https://bonzi.gay/img/desktop.vaporwave/notif.png);
+    }
+    #chat_tray:hover{filter:brightness(1.3);}
+    #chat_tray:active{filter:brightness(0.8);}
+    #chat_btn{
+    background-image:url(https://bonzi.gay/img/desktop.vaporwave/tile.png);
+    }
+    #chat_log_button {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 40px;
+    height: 30px;
+    border: 1px solid white;
+    border-radius:0px;
+    background: url('https://win98icons.alexmeub.com/icons/png/accessibility_window_speak.png');
+    background-repeat: no-repeat;
+    }
+#chat_log_button:hover{
+    filter:brightness(1.2);
+    background: url('https://win98icons.alexmeub.com/icons/png/accessibility_window_speak.png');
+    background-repeat:no-repeat;
+   }
+    #chat_log_button:active{
+    filter:brightness(0.8);
+    background: url('https://win98icons.alexmeub.com/icons/png/accessibility_window_speak.png');
+    background-repeat:no-repeat;
+    }
+    .window_header {
+       border-image:url('https://i.ibb.co/5hmdmwJ6/window-header.png')  0 9 fill / 0px 9px;
+    }
+    .window_body {
+    border-image: url('https://i.ibb.co/Tq7rPM09/window-border.png') 0 6 6 6 / 0px 6px 6px 6px;
+    }
+    .window_close {
+       background-image:url('https://i.ibb.co/Fq3Sd932/x.png');
+   }*/
+   .color {
+    width:40px;height:40px;
+   }
+   .log_icon {
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    border-collapse: separate;
+    color: black;
+    overflow: hidden;
+    border: 1px solid black;
+}
+@keyframes epilepsy {
+    from{filter:hue-rotate(0deg);}
+    to{filter:hue-rotate(360deg);}
+}
+gay-rainbow {
+    color:red;
+    animation:epilepsy 3s linear infinite;
+}
+    </style>
+    <script defer>
+
+           // This was vibe coded BTW
+let admin = false;
+let king = false;
+function elem(a){
+let r = document.getElementById(a);
+if(r !== null)return r;
+else return {}
+}
+const { entries, values } = Object;
+const { isArray } = Array;
+const { seedrandom, random, floor } = Math;
+
+if (!String.prototype.replaceAll) {
+    String.prototype.replaceAll = function(searchValue, replaceValue) {
+        const O = String(this);
+        
+        if (searchValue instanceof RegExp) {
+            if (!searchValue.global) {
+                throw new TypeError('String.prototype.replaceAll called with a non-global RegExp argument');
+            }
+            return O.replace(searchValue, replaceValue);
+        }
+  
+        const searchString = String(searchValue);
+        
+        if (searchString === '') {
+            const replaceString = String(replaceValue);
+            let result = '';
+            for (let i = 0; i <= O.length; i++) {
+                result += replaceString;
+                if (i < O.length) {
+                    result += O[i];
+                }
+            }
+            return result;
+        }
+        
+        const escapedSearch = searchString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return O.replace(new RegExp(escapedSearch, 'g'), replaceValue);
+    };
+}
+function clamp(min, x, max) {
+    return Math.min(Math.max(x, min), max);
+}
+
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+}
+
+function youtubeParser(url) {
+    let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    return match?.[7].length == 11 ? match[7] : false;
+}
+
+function sanitize(text) {
+    return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;")
+        .replaceAll("'", "&apos;");
+}
+
+window.onclick = (e) => {
+    let spoiler = e.target.closest("GAY-SPOILER");
+    spoiler?.classList.add("reveal");
+};
+
+let rules = {
+    "**": "b",
+    "~~": "i",
+    "--": "s",
+    "__": "u",
+    "``": "code",
+    "^^": "gay-big", // these are fine
+    "$r$": "gay-rainbow",
+    "||": "gay-spoiler",
+}
+
+function markup(text) {
+    text = sanitize(text);
+    text = text
+        .replace(/(^|\\n)(&gt;.*?)($|\\n)/g, "$1<span class=\"greentext\">$2</span>$3")
+        .replaceAll("\\n", "<br>");
+    for (let [token, tag] of entries(rules)) {
+        let closing = false;
+        while (text.includes(token)) {
+            text = text.replace(token, closing ? `</${tag}>` : `<${tag}>`);
+            closing = !closing;
+        }
+        if (closing) {
+            text += `</${tag}>`;
+        }
+    }
+    text = text
+        .replaceAll("{FRANCE}", "<img src=\"https://bonzi.gay/img/france.svg\" class=\"flag\" alt=\"\u{1F1EB}\u{1F1F7}\">")
+        .replace(/(https?:\/\/[^\s<>"']+)/g, "<a target=\"_blank\" href=\"$1\">$1</a>");
+    return text;
+}
+
+function nmarkup(text) {
+    while (text.includes("^^") || text.includes("||") || text.includes("\\n")) {
+        text = text.replaceAll("^^", "").replaceAll("||", "").replaceAll("\\n", "");
+    }
+    return markup(text);
+}
+
+function createPoll(poll) {
+    let element = document.createElement("div");
+    element.classList.add("poll");
+    element.classList.add(`poll_${poll.id}`);
+    element.innerHTML = `
+        ${markup(poll.title)}<br>
+        <div class="yes">Yes: <span class="yes_number">0</span></div>
+        <div class="no">No: <span class="no_number">0</span></div>
+    `;
+    element.poll = poll;
+    element.querySelector(".yes").onclick = () => {
+        socket.emit("vote", {
+            poll: poll.id,
+            vote: true
+        });
+    };
+    element.querySelector(".no").onclick = () => {
+        socket.emit("vote", {
+            poll: poll.id,
+            vote: false
+        });
+    };
+    return element;
+}
+
+function updatePoll(id, voterId, vote) {
+    let elements = document.querySelectorAll(`.poll_${id}`);
+    if (elements.length === 0) return;
+    let poll = elements[0].poll;
+    poll.votes[voterId] = vote;
+    let yesVotes = values(poll.votes).filter(x => x).length;
+    let allVotes = values(poll.votes).length;
+    let noVotes = allVotes - yesVotes;
+    let yesPercentage = yesVotes / allVotes * 100;
+    let noPercentage = noVotes / allVotes * 100;
+    for (let element of elements) {
+        element.querySelector(".yes_number").innerText = yesVotes;
+        element.querySelector(".no_number").innerText = noVotes;
+        element.querySelector(".yes").style.backgroundImage = `linear-gradient(to right, lime ${yesPercentage}%, #cfc ${yesPercentage}%)`;
+        element.querySelector(".no").style.backgroundImage = `linear-gradient(to right, red ${noPercentage}%, #fcc ${noPercentage}%)`;
+    }
+}
+
+let lastZ = 1;
+let dragged = null;
+let dragX = 0;
+let dragY = 0;
+let chatLogDragged = false;
+
+let colors = ["purple", "blue", "green", "yellow", "red", "pink", "brown", "black", "cyan", "black", "pope", "blessed", "white"];
+let hats = ["tophat", "bfdi", "bieber", "evil", "elon", "kamala", "maga", "troll", "bucket", "obama", "dank", "witch", "wizard"]
+
+let quote = null;
+let lastUser = "";
+
+function time() {
+    let date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let hourString = String(hours % 12).padStart(2, "0");
+    let minuteString = String(minutes).padStart(2, "0");
+    let ampm = hours >= 12 ? "PM" : "AM";
+    return `${hourString}:${minuteString} ${ampm}`;
+}
+
+function bonzilog(id, name, html, color, text, single) {
+    // hacky
+    // remind me to rewrite this as this is the biggest peice of dogshit
+    let icon = "";
+    let scrolled = elem("chat_log_content").scrollHeight - elem("chat_log_content").clientHeight - elem("chat_log_content").scrollTop <= 20;
+    if (color) {
+        let [baseColor, ...hats] = color.split(" ");
+        icon = `<div class="log_icon">
+            <img class="color" src="https://bonzi.gay/img/pfp/${baseColor}.webp">
+            ${hats.map(hat => `<img class="hat" src="https://bonzi.gay/img/pfp/${hat}.webp">`).join(" ")
+            }
+        </div>`;
+    } else {
+        icon = `<div class="log_left_spacing"></div>`;
+    }
+    let thisUser = `${id};${name};${color}`;
+    if (thisUser !== lastUser || single) {
+        let timeString = `<span class="log_time">${time()}</span>`;
+        elem("chat_log_content").insertAdjacentHTML("beforeend", `
+            <hr>
+            <div class="log_message">
+                ${icon}
+                <div class="log_message_cont">
+                    <div class="reply"></div>
+                    <span><b>${nmarkup(name)}</b> ${name ? timeString : ""}</span>
+                    <div class="log_message_content">${html} ${name ? "" : timeString}</div> 
+                </div>
+            </div>`);
+        lastUser = single ? "" : thisUser;
+    } else {
+     elem("chat_log_content").insertAdjacentHTML("beforeend", `
+            <div class="log_message log_continue">
+                <div class="reply"></div>
+                <div class="log_left_spacing"></div>
+                <div class="log_message_cont">
+                    <div class="log_message_content">${html}</div>
+                </div>
+            </div>`);
+    }
+    elem("chat_log_content").lastChild.querySelector(".reply").onclick = () => {
+        quote = { name, text: text };
+        talkcard.innerHTML = `Replying to ${nmarkup(name)}`;
+        chat_message.focus();
+        talkcard.hidden = false;
+    };
+    if (scrolled) {
+        elem("chat_log_content").scrollTop = elem("chat_log_content").scrollHeight;
+    }
+}
+
+function toBgImg(name, color) {
+    return color.split(" ").map(sprite => `url("https://bonzi.gay/img/bonzi/${sprite}.webp")`).reverse().join(", ");
+}
+
+let logJoins = false;
+
+class Bonzi {
+    constructor(id, userPublic) {
+        this.userPublic = userPublic == undefined ? {
+            name: "BonziBUDDY",
+            color: "purple",
+            speed: 175,
+            pitch: 50,
+            voice: "en-us",
+        } : userPublic;
+        this.color = this.userPublic.color;
+        this.data = window.BonziData;
+
+        this.eventList = [];
+        this.eventFrame = 0;
+        this.currentAnim = "idle";
+        this.animFrame = 0;
+        this.sprite = 0;
+
+        this.mute = false;
+        this.id = id == undefined ? s4() + s4() : id;
+
+        this.rng = Math.random;
+
+        this.element = document.createElement("div");
+        this.element.classList.add("bonzi");
+        this.element.style.backgroundImage = this.toBgImg();
+        this.element.style.zIndex = lastZ++;
+        this.nametag = document.createElement("div");
+        this.nametag.classList.add("bonzi_name");
+        this.element.appendChild(this.nametag);
+        this.bubble = document.createElement("div");
+        this.bubble.classList.add("bubble");
+        this.bubble.hidden = true;
+        this.bubbleCont = document.createElement("div");
+        this.bubbleCont.classList.add("bubble_cont");
+        this.bubble.appendChild(this.bubbleCont);
+        this.element.appendChild(this.bubble);
+        content.appendChild(this.element);
+
+        this.updateName();
+        this.updateSprite();
+
+        this.element.onpointerdown = (e) => {
+            if (this.bubble.contains(e.target)) return;
+            if (e.which === 1) {
+                if (!gravity) dragged = this;
+                dragX = e.pageX - this.x;
+                dragY = e.pageY - this.y;
+                this.lastX = this.x;
+                this.lastY = this.y;
+                this.element.style.zIndex = lastZ++;
+            }
+            if (e.which === 2) {
+                this.cancel();
+                this.mute = !this.mute;
+                this.updateName();
+            }
+        };
+        this.element.onclick = (e) => {
+            if (this.bubble.contains(e.target)) return;
+            if (this.x === this.lastX && this.y === this.lastY) {
+                this.cancel();
+            }
+
+        };
+
+        var coords = this.maxCoords();
+        this.x = coords.x * this.rng();
+        this.y = coords.y * this.rng();
+        this.move();
+        this.element.id = s4() + s4();
+
+        $.contextMenu({
+            selector: `#${this.element.id}`,
+            build: () => {
+                let extra = {};
+                if (admin || king) {
+                    extra = {
+                        "kick": {
+                            name: "Kick",
+                            callback: () => {
+                                socket.emit("command", {
+                                    list: ["kick", this.id],
+                                });
+                            },
+                        },
+                        "bless": {
+                            name: "Bless",
+                            callback: () => {
+                                socket.emit("command", {
+                                    list: ["bless", this.id],
+                                });
+                            },
+                        },
+                        "teFbwmpban": {
+                            name: "Temp Ban",
+                            callback: () => {
+                                socket.emit("command", {
+                                    list: ["tempban", this.id],
+                                });
+                            }
+                        },
+                        ...(admin ? {
+                            "ban": {
+                                name: "Ban",
+                                callback: () => {
+                                    socket.emit("command", {
+                                        list: ["ban", this.id],
+                                    });
+                                },
+                            },
+                            "info": {
+                                name: "Info",
+                                callback: () => {
+                                    socket.emit("command", {
+                                        list: ["info", this.id],
+                                    });
+                                },
+                            }
+                        } : {})
+                    };
+                };
+                return {
+                    items: {
+                        "cancel": {
+                            name: "Cancel",
+                            callback: () => { this.cancel(); }
+                        },
+                        "mute": {
+                            name: () => this.mute ? "Unmute" : "Mute",
+                            callback: () => {
+                                this.cancel();
+                                this.mute = !this.mute;
+                                this.updateName();
+                            }
+                        },
+                        "asshole": {
+                            name: "Call an Asshole",
+                            callback: () => {
+                                socket.emit("command", {
+                                    list: ["asshole", this.userPublic.name]
+                                });
+                            }
+                        },
+                        "bass": {
+                            name: "Call a Bass",
+                            callback: () => {
+                                socket.emit("command", {
+                                    list: ["bass", this.userPublic.name]
+                                });
+                            }
+                        },
+                        "owo": {
+                            name: "Notice Bulge",
+                            callback: () => {
+                                socket.emit("command", {
+                                    list: ["owo", this.userPublic.name]
+                                });
+                            }
+                        },
+                        ...extra,
+                    }
+                };
+            },
+            animation: {
+                duration: 175,
+                show: 'fadeIn',
+                hide: 'fadeOut'
+            }
+        });
+        this.eventList = [{
+            type: "anim",
+            anim: "surf_intro",
+            ticks: 30
+        }, { type: "idle" }];
+        if (gravity) {
+            this.element.classList.add("box2d");
+            addElement(this.element);
+        }
+    }
+
+    toBgImg() {
+        return toBgImg(this.userPublic.name, this.color);
+    }
+
+    move(x, y) {
+        if (arguments.length !== 0) {
+            this.x = x;
+            this.y = y;
+        }
+        let max = this.maxCoords();
+        let chatLog= elem("chat_log").getBoundingClientRect();
+        this.x = clamp(chatLog.width, this.x, max.x);
+        this.y = clamp(0, this.y, max.y);
+        this.element.style.left = `${this.x}px`;
+        this.element.style.top = `${this.y}px`;
+        this.updateDialog();
+    }
+
+    runEvent(list) {
+        if (this.mute) return;
+        this.cancel();
+        this.eventList = [{ type: "idle" }, ...list, { type: "idle" }];
+    }
+
+    clearDialog() {
+        this.bubbleCont.textContent = "";
+        this.bubble.hidden = true;
+    }
+
+    cancel() {
+        this.clearDialog();
+        this.stopSpeaking();
+        this.eventList = [{ type: "idle" }];
+        this.eventFrame = 0;
+    }
+
+    stopSpeaking() {
+       this.clearDialog();
+    }
+
+    setSprite(sprite) {
+        this.sprite = sprite;
+        this.element.style.backgroundPositionX = `-${sprite % 12 * 200}px`;
+        this.element.style.backgroundPositionY = `-${Math.floor(sprite / 12) * 160}px`;
+    }
+
+    setAnim(anim) {
+        this.currentAnim = anim;
+        this.animFrame = 0;
+    }
+
+    update() {
+        let anim = this.data.sprite.animations[this.currentAnim];
+        let frame = anim[this.animFrame];
+        while (typeof frame === "string") {
+            this.setAnim(frame);
+            anim = this.data.sprite.animations[this.currentAnim];
+            frame = anim[this.animFrame];
+        }
+        if (frame != null) this.setSprite(frame);
+        this.animFrame++;
+        if (this.eventList.length === 0) {
+            return;
+        }
+        let nextEvent = () => {
+            this.eventList.shift();
+            this.eventFrame = 0;
+        };
+        let event = this.eventList[0];
+        let eventType = event.type;
+        switch (eventType) {
+            case "anim":
+                if (this.eventFrame === 0) {
+                    this.setAnim(event.anim);
+                }
+                this.eventFrame++;
+                if (this.eventFrame >= event.ticks) {
+                    nextEvent();
+                }
+                break;
+            case "text":
+                if (this.eventFrame === 0) {
+                    this.talk(event.text, event.say, {
+                        quote: event.quote,
+                        french: event.french
+                    });
+                    this.eventFrame = 1;
+                };
+                if (this.bubble.hidden) nextEvent();
+                break;
+            case "idle":
+                if (this.eventFrame === 0) {
+                    this.eventFrame = 1;
+                    let toIdle = this.data.to_idle[this.currentAnim];
+                    if (toIdle) {
+                        this.setAnim(toIdle);
+                    } else {
+                        this.setAnim("idle");
+                    }
+                }
+                if (this.sprite === 0) {
+                    nextEvent();
+                }
+                break;
+            case "add_random":
+                let pool = event.pool;
+                let index = Math.floor(pool.length * this.rng());
+                let events = pool[index];
+                nextEvent();
+                for (let e of events.toReversed()) {
+                    this.eventList.unshift(e);
+                }
+                break;
+        }
+    }
+
+    talk(text, say, { quote, french } = {}) {
+        if(say == undefined)say = text;
+        this.stopSpeaking();
+        this.bubble.hidden = false;
+        text = text
+            .replaceAll("{NAME}", this.userPublic.name.replaceAll("$", "$$"))
+            .replaceAll("{COLOR}", this.color);
+        if (say != null) {
+            say = say
+                .replaceAll("{NAME}", this.userPublic.name)
+                .replaceAll("{COLOR}", this.color)
+                .replace(/\|\|.+?(\|\||$)/g, french ? "divulgacher" : "spoiler")
+                .replace(/\^\^|\$r\$|\*\*|--|~~|__|\[\[|\\n/g, "");
+        }
+
+        if (french) {
+            text = "{FRANCE} " + text;
+            say = "[[_^_fr]] " + say;
+        }
+
+        // text = linkify(text);
+        let quoteHTML = "";
+        if (quote) {
+            quoteHTML = `
+                <blockquote>
+                    ${markup(quote.text)}
+                </blockquote>
+                <font color="blue">@${nmarkup(quote.name)}</font>
+            `;
+            if (!say.startsWith("-")) say = `at ${quote.name}, ${say}`;
+        }
+        let html = `${quoteHTML}${markup(text)}`;
+        for (let word of wordBlacklist) {
+            word = word.trim().toLowerCase();
+            if (word.length === 0) continue;
+            if (text.toLowerCase().includes(word)) {
+                html = `This message was blacklisted. <button data-html="${sanitize(html)}" onclick="this.parentElement.innerHTML = this.getAttribute('data-html')">Show</button>`;
+                say = "-";
+                break;
+            }
+        }
+        this.bubbleCont.innerHTML = html;
+
+        // here marks the point where i fucking give up
+        bonzilog(this.id, this.userPublic.name, html, this.color, text, quoteHTML !== "");
+
+        if (!say.startsWith("-")) {
+            speak.play(say, {
+                "pitch": this.userPublic.pitch,
+                "speed": this.userPublic.speed
+            }, () => {
+                if (!text.includes("||")) this.clearDialog();
+            }, (source) => {
+                this.voiceSource = source;
+            });
+        }
+    }
+
+    joke() { this.runEvent(this.data.event_list_joke); }
+
+    fact() { this.runEvent(this.data.event_list_fact); }
+
+    poll(id, text) {
+        let poll = {
+            id: id,
+            title: text,
+            votes: [],
+        };
+        let element = createPoll(poll);
+        this.cancel();
+        if (!this.mute) {
+            this.bubbleCont.textContent = "";
+            this.bubbleCont.appendChild(element);
+            this.bubble.hidden = false;
+            let element2 = createPoll(poll);
+            let scrolled =elem("chat_log_content").scrollHeight - elem("chat_log_content").clientHeight - elem("chat_log_content").scrollTop <= 1;
+            bonzilog(this.id, this.userPublic.name, "", this.color, `(POLL) ${text}`, true);
+            elem("chat_log_content").lastChild.querySelector(".log_message_content").appendChild(element2);
+            if (scrolled) {
+                elem("chat_log_content").scrollTop = elem("chat_log_content").scrollHeight;
+            }
+            speak.play(text.replaceAll("[[", ""), {
+                "pitch": this.userPublic.pitch,
+                "speed": this.userPublic.speed
+            }, () => { }, (source) => {
+                this.voiceSource = source;
+            });
+        }
+    }
+
+    image(url) {
+        this.cancel();
+        if (!this.mute) {
+            let image = new Image();
+            image.src = url;
+            image.onload = () => {
+                let html = `<img src="${sanitize(url)}" class="userimage">`;
+                if (localStorage.hideImages === "true") {
+                    html = `This image is hidden. <button data-html="${sanitize(html)}" onclick="this.parentElement.innerHTML = this.getAttribute('data-html')">Show</button>`;
+                }
+                this.bubbleCont.innerHTML = html;
+                this.bubble.hidden = false;
+                bonzilog(this.id, this.userPublic.name, html, this.color, `(IMAGE)`, false);
+            };
+        }
+    }
+
+    video(url) {
+        if (this.mute) return;
+        let html = `<video class="uservideo" controls><source src="${sanitize(url)}"></video>`;
+        if (localStorage.hideImages === "true") {
+            html = `This image is hidden. <button data-html="${sanitize(html)}" onclick="this.parentElement.innerHTML = this.getAttribute('data-html')">Show</button>`;
+        }
+        this.bubbleCont.innerHTML = html;
+        this.bubble.hidden = false;
+        bonzilog(this.id, this.userPublic.name, html, this.color, `(VIDEO)`, false);
+
+    }
+
+    exit() {
+        this.runEvent([{
+            type: "anim",
+            anim: "surf_away",
+            ticks: 30
+        }]);
+        setTimeout(() => {
+            this.deconstruct();
+            bonzis.delete(this.id);
+            usersPublic.delete(this.id);
+        }, 2000);
+    }
+
+    deconstruct() {
+        this.stopSpeaking();
+        if (dragged === this) {
+            dragged = null;
+        }
+        this.element.remove();
+    }
+
+    updateName() {
+        let typing = "";
+
+        if (this.mute) {
+            typing = " (muted)";
+        } if (this.userPublic.typing) {
+            typing = ` (${this.userPublic.typing})`;
+        };
+        this.nametag.innerHTML = nmarkup(this.userPublic.name) + "" + typing;
+    }
+
+    youtube(vid) {
+        if (!this.mute) {
+            this.bubbleCont.innerHTML = `
+                    <iframe type="text/html" width="173" height="173" 
+					src="https://www.youtube.com/embed/${vid.replaceAll("\"", "'")}" 
+					style="width:173px;height:173px"
+					frameborder="0"
+					allowfullscreen="allowfullscreen"
+					mozallowfullscreen="mozallowfullscreen"
+					msallowfullscreen="msallowfullscreen"
+					oallowfullscreen="oallowfullscreen"
+					webkitallowfullscreen="webkitallowfullscreen"
+					></iframe>
+			`;
+            this.bubble.hidden = false;
+        }
+    }
+
+    backflip(swag) {
+        var event = [{
+            type: "anim",
+            anim: "backflip",
+            ticks: 15
+        }];
+        if (swag) {
+            event.push({
+                type: "anim",
+                anim: "cool_fwd",
+                ticks: 30
+            });
+            event.push({
+                type: "idle"
+            });
+        }
+        this.runEvent(event);
+    }
+
+    updateDialog() {
+        let max = this.maxCoords();
+        this.bubble.classList.remove("bubble-top");
+        this.bubble.classList.remove("bubble-left");
+        this.bubble.classList.remove("bubble-right");
+        this.bubble.classList.remove("bubble-bottom");
+        let bubbleRect = this.bubble.getBoundingClientRect();
+        if (this.data.size.x + bubbleRect.width > max.x) {
+            if (this.y < innerHeight / 2 - this.data.size.x / 2) {
+                this.bubble.classList.add("bubble-bottom");
+            } else {
+                this.bubble.classList.add("bubble-top");
+            }
+        } else {
+            if (this.x < innerWidth / 2 - this.data.size.x / 2) {
+                this.bubble.classList.add("bubble-right");
+            } else {
+                this.bubble.classList.add("bubble-left");
+            }
+        }
+    }
+
+    maxCoords() {
+        return {
+            x: innerWidth - this.data.size.x,
+            y: innerHeight - this.data.size.y - chat_bar.getBoundingClientRect().height,
+        };
+    }
+
+    asshole(target) {
+        this.runEvent(
+            [{
+                type: "text",
+                text: `Hey, ${target}!`
+            }, {
+                type: "text",
+                text: "You're a fucking asshole!",
+                say: "your a fucking asshole!"
+            }, {
+                type: "anim",
+                anim: "grin_fwd",
+                ticks: 15
+            }]
+        );
+    }
+
+    owo(target) {
+        this.runEvent(
+            [{
+                type: "text",
+                text: `*notices ${target}'s BonziBulge™*`,
+                say: `notices ${target}s bonzibulge`
+            }, {
+                type: "text",
+                text: "owo, wat dis?",
+                say: "oh woah, what diss?"
+            }]
+        );
+    }
+
+    bass(target) {
+        this.runEvent(
+            [{
+                type: "text",
+                text: `Hey, ${target}!`,
+            }, {
+                type: "text",
+                text: "You're a fucking bass!",
+            }, {
+                type: "anim",
+                anim: "grin_fwd",
+                ticks: 15
+            },]
+        );
+    }
+
+    updateSprite() {
+        this.cancel();
+        this.element.style.backgroundImage = this.toBgImg();
+        this.move();
+    }
+}
+
+window.onload = () => {
+    elem("login_load").hidden = true;
+    elem("login_card").hidden = false;
+};
+
+
+
+elem("chat_log_resize").onpointerdown = (e) => {
+    chatLogDragged = true;
+    dragX = e.pageX - elem("chat_log_resize").getBoundingClientRect().left;
+};
+
+window.onpointermove = (e) => {
+    if (dragged) {
+        dragged.move(e.pageX - dragX, e.pageY - dragY);
+    }
+    if (chatLogDragged) {
+        window.onresize();
+        elem("chat_log").style.width = `${e.pageX - dragX}px`;
+    }
+};
+
+window.onpointerup = () => {
+    dragged = null;
+    chatLogDragged = false;
+};
+
+elem('btn_tile').onclick = () => {
+    let winWidth = window.innerWidth;
+    let winHeight = window.innerHeight;
+    let minY = 0;
+    let addY = 80;
+    let x = 0, y = 0;
+    for (let bonzi of bonzis.values()) {
+        bonzi.move(x, y);
+
+        x += 200;
+        if (x + 100 > winWidth) {
+            x = 0;
+            y += 160;
+            if (y + 160 > winHeight) {
+                minY += addY;
+                addY /= 2;
+                y = minY;
+            }
+        }
+    }
+};
+
+function bonzisCheck() {
+    let safeBonzis = new Set;
+    for (let [key, public] of usersPublic.entries()) {
+        if (!bonzis.has(key)) {
+            let bonzi = new Bonzi(key, public);
+            bonzis.set(key, bonzi);
+            safeBonzis.add(bonzi);
+            if (logJoins) {
+                let msg = `${nmarkup(public.name)} has joined.`;
+                bonzilog("server", "", msg, null, msg, true);
+            }
+        } else {
+            let bonzi = bonzis.get(key);
+            bonzi.userPublic = public;
+            bonzi.updateName();
+            if (bonzi.color != public.color) {
+                bonzi.color = public.color;
+                bonzi.updateSprite();
+            }
+            safeBonzis.add(bonzi);
+        }
+    }
+    for (let bonzi of bonzis.values()) {
+        if (!safeBonzis.has(bonzi)) {
+            bonzi.exit();
+        }
+    }
+};
+
+
+
+let socket = io("https://bonzi.gay");
+
+let usersPublic = new Map;
+let bonzis = new Map;
+
+function login() {
+    socket.emit("login", {
+        name: login_name.value,
+        room: login_room.value,
+    });
+    setup();
+}
+
+login_go.onclick = login;
+
+login_room.value = window.location.hash.slice(1);
+
+function loginOnEnter(e) {
+    if (e.which == 13) login();
+}
+
+login_name.onkeypress = loginOnEnter;
+login_room.onkeypress = loginOnEnter;
+
+socket.on("ban", (data) => {
+    page_ban.hidden = false;
+    ban_reason.innerHTML = data.reason;
+    ban_end.textContent = new Date(data.end).toString();
+});
+
+socket.on("kick", (data) => {
+    page_kick.hidden = false;
+    kick_reason.innerHTML = data.reason;
+});
+
+socket.on("loginFail", (data) => {
+    login_card.hidden = false;
+    login_load.hidden = true;
+    login_error.hidden = false;
+    login_error.textContent = `Error: ${data.reason}`;
+});
+
+socket.on("disconnect", () => {
+    errorFatal();
+    logJoins = false;
+    socket.connect();
+});
+
+let typingTimeout = 0;
+
+function errorFatal() {
+    if (!page_ban.hidden || page_kick.hidden) {
+        page_error.hidden = false;
+    }
+}
+
+function typing(bool) {
+    if (bool) {
+        if (!typingTimeout) {
+            socket.emit("typing", 1);
+        } else {
+            clearTimeout(typingTimeout)
+        }
+        typingTimeout = setTimeout(() => {
+            socket.emit("typing", 0);
+            typingTimeout = 0;
+        }, 2000);
+    } else {
+        if (typingTimeout) {
+            socket.emit("typing", 0);
+            clearTimeout(typingTimeout)
+            typingTimeout = 0;
+        }
+    }
+}
+
+let joined = false;
+
+function setup() {
+    chat_send.onclick = sendInput;
+    joined = true;
+
+
+    chat_message.onkeypress = (e) => {
+        if (e.which === 13) sendInput();
+    };
+
+    chat_message.oninput = () => {
+        let value = chat_message.value;
+        if (value.trim() === "") {
+            typing(false);
+        } else {
+            typing(true);
+        }
+    };
+
+    socket.on("room", (data) => {
+        room_owner.hidden = !data.isOwner;
+        room_public.hidden = !data.isPublic;
+        room_private.hidden = data.isPublic;
+        room_id.textContent = data.room;
+    });
+
+    socket.on("updateAll", (data) => {
+        page_login.hidden = true;
+        usersPublic.clear();
+        for (let [id, user] of entries(data.usersPublic)) {
+            usersPublic.set(id, user);
+        }
+        bonzisCheck();
+        logJoins = true;
+    });
+
+    socket.on("update", (data) => {
+        usersPublic.set(data.guid, data.userPublic);
+        bonzisCheck();
+    });
+
+    socket.on("talk", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.runEvent([{
+            type: "text",
+            text: data.text,
+            quote: data.quote,
+        }]);
+    });
+
+    socket.on("joke", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.rng = new seedrandom(data.rng);
+        bonzi.cancel();
+        bonzi.joke();
+    });
+
+    socket.on("youtube", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.cancel();
+        bonzi.youtube(data.vid);
+    });
+
+    socket.on("fact", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.rng = new seedrandom(data.rng);
+        bonzi.fact();
+    });
+
+    socket.on("backflip", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.backflip(data.swag);
+    });
+
+    socket.on("asshole", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.asshole(data.target);
+    });
+
+    socket.on("bass", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.bass(data.target);
+    });
+
+    socket.on("owo", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.owo(data.target);
+    });
+
+    socket.on("triggered", function (data) {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.runEvent(bonzi.data.event_list_triggered);
+    });
+
+    socket.on("linux", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.runEvent(bonzi.data.event_list_linux);
+    });
+
+    socket.on("pawn", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.runEvent(bonzi.data.event_list_pawn);
+    });
+
+    socket.on("leave", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        if (bonzi) {
+            let msg = `${nmarkup(bonzi.userPublic.name)} has left.`;
+            bonzilog("server", "", msg, null, msg, false);
+            bonzi.exit();
+        }
+    });
+
+    socket.on("poll", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.poll(data.poll, data.title);
+    });
+
+    socket.on("image", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.image(data.url);
+    });
+
+    socket.on("video", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        bonzi.video(data.url);
+    });
+
+    socket.on("vote", (data) => {
+        updatePoll(data.poll, data.guid, data.vote);
+    });
+
+    socket.on("french", (data) => {
+        let bonzi = bonzis.get(data.guid);
+        // bonzi.runEvent([{
+        //     type: "text",
+        //     text: data.text,
+        //     french: true
+        // }]);
+        bonzi.runEvent([{
+            type: "text",
+            text: "{FRANCE} France is being fixed. Thanks for your understanding.",
+            say: "France is being fixed. Thanks for your understanding.",
+        }])
+    });
+}
+
+function sendInput() {
+    let text = chat_message.value;
+    chat_message.value = "";
+    typing(false);
+    scope: if (text.length > 0) {
+        let youtube = youtubeParser(text);
+        if (youtube) {
+            socket.emit("command", {
+                list: ["youtube", youtube],
+            });
+            break scope;
+        }
+
+        if (quote) {
+            socket.emit("talk", {
+                text: text,
+                quote: quote,
+            });
+        } else if (text[0] === "/") {
+            let list = text.slice(1).split(" ");
+            if (list[0] === "clear") {
+                lastUser = "";
+                elem("chat_log_content").innerText = "";
+            } else if (list[0] === "settings") {
+                openSettings();
+            } else if (list[0] === "sex" || list[0] === "dolphin") {
+                dolphin();
+            } else if (list[0] === "debug:bless") {
+                blessedPopup();
+            } else {
+                socket.emit("command", {
+                    list: list,
+                });
+            }
+        } else {
+            socket.emit("talk", {
+                text: text,
+            });
+        }
+    }
+    quote = null;
+    talkcard.hidden = true;
+}
+
+elem("chat_log_button").onclick = () => {
+    elem("chat_log_button").hidden = true;
+   elem("chat_log").hidden = false;
+    window.onresize();
+};
+
+elem("chat_log_close").onclick = () => {
+    elem("chat_log_button").hidden = false;
+    elem("chat_log").hidden = true;
+};
+
+socket.on("connect", () => {
+    page_error.hidden = true;
+    if (joined) {
+        socket.emit("login", {
+            name: login_name.value,
+            room: login_room.value,
+        });
+    }
+});
+
+class Dialog {
+    constructor(opt = {}) {
+        if(opt.title == undefined)opt.title = "Window";
+       if(opt.width==undefined) opt.width = 400;
+        if(opt.height==undefined)opt.height = 300;
+        this.x = opt.x == null || opt.x == undefined ? 0 : opt.x;
+        this.y = opt.y == null || opt.y == undefined ? 0 : opt.y;
+        this.element = document.createElement("div");
+        this.element.classList.add("window");
+        if (opt.class) this.element.classList.add(opt.class);
+        this.element.innerHTML = `
+        <div class="window_header">
+        ${sanitize(opt.title)}
+        <div class="window_close"></div>
+        </div>
+        <div class="window_body"></div>
+        `;
+        this.move(this.x, this.y);
+        this.element.style.position = "absolute";
+        this.element.style.zIndex = lastZ++ + 9999;
+        this.element.querySelector(".window_header").onpointerdown = (e) => {
+            dragged = this;
+            dragX = e.pageX - this.x;
+            dragY = e.pageY - this.y;
+        };
+        this.element.querySelector(".window_close").onclick = () => {
+            this.element.remove();
+        };
+        this.element.style.width = `${opt.width}px`;
+        this.element.style.height = `${opt.height}px`;
+        this.element.querySelector(".window_body").innerHTML = opt.html;
+        content.appendChild(this.element);
+    }
+
+    move(x, y) {
+        this.x = x;
+        this.y = y;
+        this.element.style.left = `${x}px`;
+        this.element.style.top = `${y}px`;
+    }
+}
+localStorage = {}
+function initSettings() {
+    if(localStorage.imageBlacklist == undefined || localStorage.imageBlacklist == null)localStorage.imageBlacklist = "false";
+    if(localStorage.classicBg == undefined || localStorage.classicBg == null)localStorage.classicBg = "false";
+    if(localStorage.wordBlacklist == undefined || localStorage.wordBlacklist == null)localStorage.wordBlacklist = "[]";
+}
+
+let wordBlacklist = [];
+
+if (localStorage.length === 0) {
+    initSettings();
+} else try {
+    wordBlacklist = JSON.parse(localStorage.wordBlacklist);
+    if (!isArray(wordBlacklist)) throw TypeError("wordBlacklist is not an array");
+    for (let word of wordBlacklist) {
+        if (typeof word !== "string") throw TypeError("wordBlacklist is broken");
+    }
+    document.body.classList.toggle("classic", localStorage.classicBg === "true");
+} catch (err) {
+    console.error("Loading settings failed: ", err);
+    initSettings();
+}
+
+function xpath(el, expr) {
+    let result = el.getRootNode().evaluate(expr, el);
+    switch (result.resultType) {
+        case XPathResult.BOOLEAN_TYPE:
+            return result.booleanValue;
+        case XPathResult.NUMBER_TYPE:
+            return result.numberValue;
+        case XPathResult.STRING_TYPE:
+            return result.stringValue;
+        case XPathResult.UNORDERED_NODE_ITERATOR_TYPE:
+            let list = [];
+            let node;
+            while (node = result.iterateNext()) {
+                list.push(node);
+            }
+            return list;
+    }
+}
+
+function exportSettings() {
+    let xml = `<?xml version="1.0"?>
+<settings>
+    <hideImages on="${localStorage.hideImages === "true"}"/>
+    <classicBg on="${localStorage.classicBg === "true"}"/>
+`;
+    let wordBlacklist = JSON.parse(localStorage.wordBlacklist);
+    if (wordBlacklist.length > 0) {
+        xml += "    <blacklist>\n"
+        for (let word of wordBlacklist) {
+            xml += `        <word>${sanitize(word)}</word>\n`
+        }
+        xml += "    </blacklist>\n"
+    }
+    xml += "</settings>";
+    return xml;
+}
+
+function importSettings(xml) {
+    let parser = new DOMParser();
+    let settingsXML = parser.parseFromString(xml, "application/xml");
+    let settings = settingsXML.documentElement;
+    if (settingsXML.querySelector("parsererror")) {
+        throw Error(`Parser error: ${settingsXML.querySelector("parsererror").textContent}`);
+    } else if (settings.tagName !== "settings") {
+        throw Error(`Root tag is <${settings.tagName}>, not <settings>`);
+    }
+    initSettings();
+    localStorage.hideImages = xpath(settings, "string(./hideImages/@on)") === "true";
+    localStorage.classicBg = xpath(settings, "string(./classicBg/@on)") === "true";
+    wordBlacklist = [];
+    for (let word of xpath(settings, "./blacklist/word")) {
+        wordBlacklist.push(word.textContent);
+    }
+    localStorage.wordBlacklist = JSON.stringify(wordBlacklist);
+
+    document.body.classList.toggle("classic", localStorage.classicBg === "true");
+}
+
+let settingsDialog;
+
+function openSettings() {
+    if (settingsDialog) {
+        settingsDialog.element.remove();
+    }
+    settingsDialog = new Dialog({
+        title: "Settings",
+        class: "settings",
+        html: `
+            <div>
+                <label><input type="checkbox" class="hide"> Hide Images</label><br>
+                <label><input type="checkbox" class="classic"> Classic Background Color</label>
+            </div>  
+            <div class="blacklist">
+                <header>Blacklisted words: </header>
+                <textarea class="blacklist_words" placeholder="Newline-seperated list of blacklisted words."></textarea>
+            </div>
+            <div class="button_row">
+                <button class="import">Import</button>
+                <button class="export">Export</button>
+            </div>
+        `,
+        width: 600,
+        height: 400,
+        x: 20,
+        y: 20
+    });
+    let element = settingsDialog.element;
+    let hideImages = element.querySelector(".hide");
+    let classicBg = element.querySelector(".classic");
+    let blacklist = element.querySelector(".blacklist_words");
+    let add = element.querySelector(".add");
+    hideImages.checked = localStorage.hideImages === "true";
+    classicBg.checked = localStorage.classicBg === "true";
+    hideImages.oninput = () => {
+        localStorage.hideImages = hideImages.checked;
+    }
+    classicBg.oninput = () => {
+        localStorage.classicBg = classicBg.checked;
+        document.body.classList.toggle("classic", classicBg.checked);
+    }
+    blacklist.value = wordBlacklist.join("\n");
+    blacklist.oninput = () => {
+        let words = blacklist.value.split("\n");
+        wordBlacklist = [];
+        for (let word of words) {
+            word = word.trim();
+            if (word.length > 0) {
+                wordBlacklist.push(word);
+            }
+        }
+        localStorage.wordBlacklist = JSON.stringify(wordBlacklist);
+    }
+    element.querySelector(".export").onclick = () => {
+        exportWindow();
+    }
+    element.querySelector(".import").onclick = () => {
+        importWindow();
+    }
+}
+
+function exportWindow() {
+    let dialog = new Dialog({
+        title: "Export Settings",
+        class: "export_window",
+        html: `
+            <textarea class="export fill" readonly></textarea>
+        `,
+        width: 400,
+        height: 300,
+        x: 100,
+        y: 100
+    });
+    let element = dialog.element;
+    let exportText = element.querySelector(".export");
+    exportText.value = exportSettings();
+    exportText.focus();
+}
+
+function importWindow() {
+    let dialog = new Dialog({
+        title: "Import Settings",
+        class: "import_window",
+        html: `
+            <textarea class="import fill" placeholder="Paste your settings here."></textarea>
+            <div class="button_row">
+                <button class="import_button">Import</button>
+            </div>
+        `,
+        width: 400,
+        height: 300,
+        x: 100,
+        y: 100
+    });
+    let element = dialog.element;
+    let importText = element.querySelector(".import");
+    importText.focus();
+    element.querySelector(".window_close").onclick = () => {
+        dialog.element.remove();
+    }
+    element.querySelector(".import_button").onclick = () => {
+        let text = importText.value;
+        try {
+            let lastX = settingsDialog.x;
+            let lastY = settingsDialog.y;
+            importSettings(text);
+            openSettings();
+            settingsDialog.move(lastX, lastY);
+        } catch (err) {
+            new Dialog({
+                title: "Error",
+                class: "flex_window",
+                html: `<div class="fill center"><span>${markup(err.message)}</span></div>`,
+                width: 400,
+                height: 200,
+                x: 100,
+                y: 100,
+            });
+        }
+    }
+}
+
+let gravity = false;
+
+function dolphin() {
+    if (!gravity) {
+        gravity = true;
+        $("#content").jGravity({
+            target: ".bonzi",
+            depth: Infinity,
+        });
+    }
+}
+
+function cmd(str) {
+    socket.emit("command", { list: str.split(" ") });
+}
+
+function blessedPopup() {
+    new Dialog({
+        title: "Blessmode",
+        class: "flex_window",
+        html: `
+            <div class="blessed_body">
+                <h1><marquee>YOU'VE BEEN BLESSED!</marquee></h1>
+                Blessed is a VIP-like status given to users who I like.<br>
+                You now have access to:<br>
+                <ul>
+                    <li> <b>Mutlihatting</b>: Use the /hat command with up to 3 hats. Try <var>/hat dank tophat</var>.
+                    <li> <b>Skins:</b> 3 custom skins
+                    <li> <b>Hats:</b> 3 extra hats
+                </ul>
+                <h3>Skins</h3>
+                <div class="roulette">
+                    <div class="card angel" onclick="cmd('angel')"></div>
+                    <div class="card glow" onclick="cmd('glow')"></div>
+                    <div class="card noob" onclick="cmd('noob')"></div>
+                </div>
+                <h3>Hats</h3>
+                <div class="roulette">
+                    <div class="cardhat dank" onclick="cmd('hat dank')"></div>
+                    <div class="cardhat illuminati" onclick="cmd('hat illuminati')"></div>
+                    <div class="cardhat cigar" onclick="cmd('hat cigar')"></div>
+                </div>
+            </div>
+        `,
+        x: 300,
+        y: 400,
+        width: 600,
+        height: 400,
+    })
+}
+window.onresize = () => {
+    for (let bonzi of bonzis.values()) {
+        bonzi.move();
+    }
+};
+
+socket.on("blessed", blessedPopup);
+socket.on("king", () => king = true);
+socket.on("admin", () => admin = true);
+setInterval(() => {
+    for (let bonzi of bonzis.values()) {
+        bonzi.update();
+    }
+}, 66.67);
+    </script>
+</body>
+</html>
