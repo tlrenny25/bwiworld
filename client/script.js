@@ -866,14 +866,6 @@ async function clipboard(text) {
                           },
                           {
                               type: 0,
-                              name: "Advanced Info",
-                              disabled: level <= 2,
-                              callback: (passthrough)=>{
-                                  socket.emit("command", {command: "advinfo", param: passthrough.id})
-                              }
-                          },
-                          {
-                              type: 0,
                               name: "BAN",
                               disabled: level <= 2,
                               callback: (passthrough)=>{
