@@ -1,21 +1,17 @@
 {
     "port": 3000,
-    "godmodes": ["GODMODEFSDIGYS8TRY43IR29WFREWWSFHYGIAS"]
+    "godword": ["9dba5fede0ed35b3a63325e582e4aa626d86af5d60c736e8a10f6eecee10b4b7"],
     "kingwords": [
-        "hjsahf8svyisdyfg934ut8egfdog",
-        "fdshfvhuG7GVidsgs",
-        "fdskjvfksgvsayt78fz568576dsafjgas",
-        "HORRORNANOWILLGOTOHELLd7324372394729",
-        "fsodhfshgafjwodgjosaahjg43r3",
-        "adsfgsdgfgsdjflskd",
-        "eeeeeeeeeeeeeeeeeeeeeeeeeeetyyaaaaaa",
-        "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmhoe3214134",
-        "shutup32142342354",
-        "notwritingmore42342345235"
+        "e58e84d5ab091fe6a79a3dc7076351ab402e34a6b7d028dbe19aba4e262ab889",
+        "b3fcaf9191628568d673f1ee5c0738bb7dc08d044013bc800f7bb570e8265a28",
+        "2df4f1c99edcfbd37a01aa61b13a440267e938e3b0e10376aefe9ee8bee60ad7",
+        "c2ff93ce4de90b3cc6552eb8d227ddb7dd059290bc72dba5088aed823ca89324",
+        "ac52a27c8b97de704c4c5ed4f5390eaaed300ddf8292c641f2f439db9ab89e64",
+        "033c93d185931239fe4d221d785ecd510492f82a4b4f68714b06050e6e060803"
     ],
     "lowkingwords": [
-        "radicalgreenisdabist4325253453453453",
-        "sadjaslfjsdhfdst7254825347234"
+        "c9efe7afdbf7a5801062f2cc5cc0eaea6211fa227ee278e0fec8f0200951ffcf",
+        "83f41f0f2ccd187ec961be0562253d87fa238eab688c96670bf5b9ced44951c7"
     ],
     "defname": "User",
     "maxname": 45,
