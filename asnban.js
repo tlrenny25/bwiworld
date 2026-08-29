@@ -80,6 +80,7 @@ const DEFAULT_BANNED = [
     211252, // Delis LLC (proxy)
     215826, // Aeza variant
     210079, // EstNoc
+    28573, // simones asn
 ];
 
 const CACHE_FILE = path.join(__dirname, "config/asn_cache.json");
