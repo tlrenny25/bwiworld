@@ -124,7 +124,7 @@ const whitelist = [
 	"https://i.imgur.com",
 	"https://imgur.com",
 	"https://litter.catbox.moe",
-	"https://cdn.bonziupload.qzz.io"
+	"https://bonziupload.pxxlspace.cv"
 ];
 module.exports.whitelist = whitelist;
 setInterval(()=>{module.exports.bancount = 0}, 60000*5)
