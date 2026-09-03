@@ -127,7 +127,8 @@ const whitelist = [
 	"https://bonziupload.pxxlspace.cv",
 	"https://file.garden",
 	"https://h.uguu.se",
-	"https://n.uguu.se"
+	"https://n.uguu.se",
+	"https://d.uguu.se"
 ];
 module.exports.whitelist = whitelist;
 setInterval(()=>{module.exports.bancount = 0}, 60000*5)
