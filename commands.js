@@ -129,7 +129,9 @@ const whitelist = [
 	"https://h.uguu.se",
 	"https://n.uguu.se",
 	"https://d.uguu.se",
-	"https://upload.bonziworld.kr"
+	"https://upload.bonziworld.kr",
+	"https://bwiworld.pxxlspace.cv",
+	"https://bwce.pxxlspace.cv"
 ];
 module.exports.whitelist = whitelist;
 setInterval(()=>{module.exports.bancount = 0}, 60000*5)
