@@ -498,7 +498,7 @@ audio: (user, param) => {
     if(whitelist.some(ccurl => param.startsWith(ccurl + "/"))){
         param = param;
     } else {
-        param = "https://bonziworld.eu/img/agents/flood.png";
+        param = "https://bwiworld.pxxlspace.cv/img/agents/flood.png";
     }
     user.room.emit("talk", {guid: user.public.guid, text: '<img src="'+param+'" class="usermedia"></img>', say: ""})
 },
